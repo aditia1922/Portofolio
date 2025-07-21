@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Aditia Sakti S T</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+
+    .light-mode {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
+    /* Slides */
+    .slide {
+      width: 100%;
+      height: 100vh;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-mode:hover {
+      background: #2980b9;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: white;
+      padding: 5px;
+      border: 3px solid #2c3e50;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: inherit;
+    }
+
+    .description {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      color: inherit;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #3498db;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: inherit;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      display: flex;
+      gap: 15px;
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .project-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 2px solid #3498db;
+    }
+
+    .project-content {
+      flex: 1;
+    }
+
+    .light-mode .project-card {
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .hobbies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .hobby-card {
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .hobby-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .light-mode .hobby-card {
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn {
+      display: inline-block;
+      background: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #aaa;
+    }
+
+    /* Navigation dots */
+    .slide-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #bbb;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #3498db;
+      transform: scale(1.3);
+    }
+
+    .dark-mode .dot {
+      background-color: #555;
+    }
+
+    .dark-mode .dot.active {
+      background-color: #3498db;
+    }
+
+    /* Slide-specific styling */
+    #slide1 {
+      background-color: rgba(30, 30, 30, 0.9);
+    }
+
+    .light-mode #slide1 {
+      background-color: rgba(240, 240, 240, 0.9);
+    }
+
+    #slide2 {
+      background-color: rgba(40, 40, 40, 0.9);
+    }
+
+    .light-mode #slide2 {
+      background-color: rgba(230, 230, 230, 0.9);
+    }
+
+    #slide3 {
+      background-color: rgba(50, 50, 50, 0.9);
+    }
+
+    .light-mode #slide3 {
+      background-color: rgba(220, 220, 220, 0.9);
+    }
+
+    #slide4 {
+      background-color: rgba(60, 60, 60, 0.9);
+    }
+
+    .light-mode #slide4 {
+      background-color: rgba(210, 210, 210, 0.9);
+    }
+
+    #slide5 {
+      background-color: rgba(70, 70, 70, 0.9);
+    }
+
+    .light-mode #slide5 {
+      background-color: rgba(200, 200, 200, 0.9);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-img {
+        margin-bottom: 10px;
+      }
+
+      .project-card {
+        flex-direction: column;
+      }
+
+      .project-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .slide-nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <button class="toggle-mode" onclick="toggleMode()">Mode Terang</button>
+  
+  <div class="slide-nav" id="slideNav">
+    <div class="dot active" data-slide="1"></div>
+    <div class="dot" data-slide="2"></div>
+    <div class="dot" data-slide="3"></div>
+    <div class="dot" data-slide="4"></div>
+    <div class="dot" data-slide="5"></div>
+  </div>
+
+  <div class="slideshow-container" id="slideshow">
+    <!-- Slide 1: Profile -->
+    <div class="slide" id="slide1">
+      <div class="container">
+        <header>
+          <img src="4837a61a-6aab-4e05-867e-21b5b1bd09fb.png" alt="Aditia Sakti" class="profile-img" />
+          <div>
+            <h1>Aditia Sakti S T</h1>
+            <p class="description">Fresh graduate Teknik Informatika (UIKA Bogor, lulus Desember 2024) dengan semangat tinggi dalam pengembangan teknologi dan desain antarmuka. Berpengalaman mengembangkan proyek pribadi seperti website motivasi dan kanal YouTube. Siap belajar, berkembang, dan memberikan kontribusi nyata dalam dunia kerja.</p>
+          </div>
+        </header>
+
+        <div class="contact-info">
+          <div>
+            <p><i class="fas fa-envelope"></i> jonggrang1922@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +62 857 8519 4145</p>
+            <p><i class="fas fa-birthday-cake"></i> 1 Oktober 1998</p>
+          </div>
+          <div>
+            <p><i class="fas fa-map-marker-alt"></i> Desa Jonggrang, RT 03 RW 01, Kecamatan Barat, Kabupaten Magetan, Jawa Timur, Indonesia</p>
+            <p><i class="fas fa-praying-hands"></i> Agama: Islam</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://www.facebook.com/profile.php?id=100006453804733" target="_blank" title="Facebook: Adit Tya S"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/aditya_ats/" target="_blank" title="Instagram: @aditya_ats"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/aditia-sakti-4163a9259/" target="_blank" title="LinkedIn: Aditia Sakti"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Pendidikan -->
+    <div class="slide" id="slide2">
+      <div class="container">
+        <section>
+          <h2>Pendidikan</h2>
+          <p><strong>S1 Teknik Informatika</strong> - Universitas Ibn Khaldun Bogor</p>
+          <p><strong>IPK:</strong> 3.05</p>
+          <p><strong>Judul Skripsi:</strong> PROTOTIPE SISTEM KEAMANAN PINTU LABORATORIUM MULTIMEDIA DENGAN SIDIK JARI DAN NOTIFIKASI TELEGRAM</p>
+        </section>
+
+        <section>
+          <h2>Pengalaman Magang</h2>
+          <p><strong>Quality Control – PT Ken Sinergi Indonesia</strong></p>
+          <p><em>11 September – 25 November 2022</em></p>
+          <ul>
+            <li>Menggunakan alat testing dan pengolahan data untuk memeriksa kompatibilitas dengan tingkat akurasi hingga 95%.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <!-- Slide 3: Proyek Mandiri -->
+    <div class="slide" id="slide3">
+      <div class="container">
+        <section>
+          <h2>Proyek Mandiri</h2>
+          <div class="projects">
+            <div class="project-card">
+              <img src="project1.jpg" alt="Video Jawa Lucu" class="project-img" />
+              <div class="project-content">
+                <h3>Video Jawa Lucu</h3>
+                <p>Channel YouTube berisi konten humor khas Jawa</p>
+                <a href="https://www.youtube.com/@adoh_paranofficial5085" target="_blank" class="btn">Lihat Proyek</a>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="project2.jpg" alt="Motivasi Anak Muda" class="project-img" />
+              <div class="project-content">
+                <h3>Motivasi Anak Muda</h3>
+                <p>Website inspirasi untuk generasi muda</p>
+                <a href="https://aditia1922.github.io/motivasi-web/" target="_blank" class="btn">Lihat Proyek</a>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="project3.jpg" alt="ATS Clothing" class="project-img" />
+              <div class="project-content">
+                <h3>ATS Clothing</h3>
+                <p>Website penjualan brand pakaian pribadi bernama ATS. Menyediakan berbagai produk fashion dengan desain modern dan kekinian.</p>
+                <a href="https://aditia1922.github.io/ats-clothing/#" target="_blank" class="btn">Lihat Proyek</a>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="project4.jpg" alt="WEB Desa Jonggrang" class="project-img" />
+              <div class="project-content">
+                <h3>WEB Desa Jonggrang</h3>
+                <p>Website resmi Desa Jonggrang, menampilkan informasi tentang desa, potensi wisata, dan kegiatan masyarakat.</p>
+                <a href="https://aditia1922.github.io/Desajonggrang/" target="_blank" class="btn">Lihat Proyek</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Slide 4: Hobi & Pengalaman -->
+    <div class="slide" id="slide4">
+      <div class="container">
+        <section>
+          <h2>Hobi & Pengalaman</h2>
+          <div class="hobbies">
+            <div class="hobby-card">
+              <img src="gym.jpg" alt="Gym" class="hobby-img" />
+              <h3>Gym</h3>
+              <p>"Disiplin adalah jembatan antara tujuan dan pencapaian."</p>
+            </div>
+            <div class="hobby-card">
+              <img src="sepak-bola.jpg" alt="Sepak Bola" class="hobby-img" />
+              <h3>Sepak Bola</h3>
+              <p>"Kemenangan bukanlah segalanya, tapi berusaha untuk menang adalah."</p>
+            </div>
+            <div class="hobby-card">
+              <img src="jogging.jpg" alt="Jogging" class="hobby-img" />
+              <h3>Jogging</h3>
+              <p>"Lari bukan hanya tentang kaki, tapi juga tentang hati dan pikiran."</p>
+            </div>
+            <div class="hobby-card">
+              <h3>Stand Up Comedy</h3>
+              <p>Pernah mengikuti audisi SUCI 11 (Stand Up Comedy Indonesia) dan memiliki pengalaman tampil di beberapa acara.</p>
+              <a href="https://www.youtube.com/watch?v=BQe07ba1Ys0&t=201s" target="_blank" class="btn">Lihat Penampilan</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Slide 5: Kemampuan -->
+    <div class="slide" id="slide5">
+      <div class="container">
+        <section>
+          <h2>Kemampuan Teknis</h2>
+          <ul>
+            <li>Instalasi & konfigurasi OS (Windows & dasar Linux)</li>
+            <li>Troubleshooting laptop & jaringan (Wi-Fi, IP, DNS)</li>
+            <li>Remote desktop tools: AnyDesk, TeamViewer</li>
+            <li>Bahasa pemrograman dasar C++</li>
+            <li>Visual Studio Code, HTML/CSS Dasar</li>
+            <li>Canva, Microsoft Word & Excel</li>
+            <li>Wireshark (dasar – analisis paket jaringan)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Kemampuan Pendukung</h2>
+          <ul>
+            <li><strong>Public Speaking:</strong> Terbiasa berbicara di depan umum dan menyampaikan materi dengan percaya diri. Memiliki pengalaman tampil di ajang Stand Up Comedy Indonesia (SUCI) 11 Kompas TV – Jakarta.</li>
+            <li><strong>Komunikasi & Adaptasi Sosial:</strong> Terbiasa akrab dengan lingkungan baru.</li>
+            <li><strong>Problem Solving:</strong> Cepat tanggap dalam menangani kendala teknis dan mencari solusi yang efektif.</li>
+          </ul>
+        </section>
+
+        <footer>
+          <p>Terima kasih telah mengunjungi portofolio saya</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.querySelector('.toggle-mode');
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+
+      if (body.classList.contains('dark-mode')) {
+        btn.textContent = 'Mode Terang';
+      } else {
+        btn.textContent = 'Mode Gelap';
+      }
+    }
+
+    // Slide navigation functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const slideshow = document.getElementById('slideshow');
+      
+      // Set up dot navigation
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          const slideIndex = parseInt(this.getAttribute('data-slide')) - 1;
+          slides[slideIndex].scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+      
+      // Update active dot on scroll
+      slideshow.addEventListener('scroll', function() {
+        const slideHeight = window.innerHeight;
+        const currentSlide = Math.round(slideshow.scrollTop / slideHeight);
+        
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        const currentSlide = Math.round(slideshow.scrollTop / window.innerHeight);
+        
+        if (e.key === 'ArrowDown' && currentSlide < slides.length - 1) {
+          slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp' && currentSlide > 0) {
+          slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
